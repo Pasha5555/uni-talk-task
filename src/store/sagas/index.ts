@@ -16,7 +16,7 @@ function* handleOperatorsFetching() {
     } catch (error: any) {
         yield put(operatorsFetchingError(error.message));
     }
-};
+}
 
 function* handleOperatorAddonsFetching() {
     try {
@@ -25,13 +25,13 @@ function* handleOperatorAddonsFetching() {
     } catch (error: any) {
         yield put(operatorsFetchingError(error.message));
     }
-};
+}
 
 function* operatorsSaga() {
     yield takeLatest(operatorsFetching.type, handleOperatorsFetching);
     yield takeLatest(operatorAddonsFetching.type, handleOperatorAddonsFetching);
-};
+}
 
 export default function* rootSaga() {
     yield all([operatorsSaga()]);
-};
+}
