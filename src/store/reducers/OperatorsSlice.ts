@@ -1,4 +1,4 @@
-import { Action, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IOperator } from "../../models/IOperator";
 import { IOperatorAddon } from "../../models/IOperatorAddon";
 

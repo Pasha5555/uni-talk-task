@@ -81,4 +81,4 @@ export function formatDate(dateString: string): string {
   const [hours, minutes] = timePart.split(':');
   
   return `${day}.${month}.${year} ${hours}:${minutes}`;
-};
+}
