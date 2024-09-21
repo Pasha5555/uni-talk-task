@@ -1,11 +1,9 @@
-import { Container, TextField, Typography } from '@mui/material';
+import { TextField } from '@mui/material';
 import Card from '@mui/material/Card';
-import { GridColDef } from '@mui/x-data-grid';
 import * as React from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { IOperator } from '../../models/IOperator';
 import { operatorAddonsFetching, operatorsFetching } from '../../store/reducers/OperatorsSlice';
 import { getTableColumns, getTableRows } from '../../utils/utils';
 import OperatorsTable from '../OperatorsTable/OperatorsTable';
@@ -54,7 +52,7 @@ export default function OperatorsTableWrapper (props: IAppProps) {
     useEffect(() => {
       dispatch(operatorsFetching());
       dispatch(operatorAddonsFetching());
-    }, [])
+    }, [dispatch])
 
     console.log(columns, rows);
     

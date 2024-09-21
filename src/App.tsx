@@ -1,9 +1,8 @@
 import { Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import OperatorsTableWrapper from './components/OperatorsTableWrapper/OperatorsTableWrapper';
-import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
-import { operatorAddonsFetching, operatorsFetching } from './store/reducers/OperatorsSlice';
+
 
 function App() {
   return (

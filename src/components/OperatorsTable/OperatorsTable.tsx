@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { IOperator } from '../../models/IOperator';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import { Box, tableCellClasses, TableContainer } from '@mui/material';
 import styled from 'styled-components';
 
 

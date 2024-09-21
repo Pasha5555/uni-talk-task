@@ -1,4 +1,4 @@
-import { Checkbox, Typography } from "@mui/material";
+import { Checkbox } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import React from "react";
 import User from "../components/common/User";
