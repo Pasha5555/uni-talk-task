@@ -19,6 +19,7 @@
     "rules": {
         "no-restricted-imports": ["warn"],
         "react/jsx-no-target-blank": ["warn"],
-        "no-undef": ["error"]
+        "no-undef": ["error"],
+        "no-unused-expressions": ["off"]
     }
 }
