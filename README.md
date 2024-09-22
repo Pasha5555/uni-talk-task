@@ -1,4 +1,5 @@
-# The application is deployed by url: https://uni-talk-task.netlify.app/
+# The application is deployed by url: 
+  https://uni-talk-task.netlify.app/
 
 # Technical stack
 - **Typescript**
