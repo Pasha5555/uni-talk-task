@@ -1,55 +1,26 @@
 import * as React from 'react';
-import { IOperator } from '../../models/IOperator';
-import { DataGrid } from '@mui/x-data-grid';
+import { GridPaginationModel } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import styled from 'styled-components';
-
-
-const paginationModel = { page: 0, pageSize: 10 };
+import { useState } from 'react';
+import { StyledDataGrid } from './styled';
+import { GridColDef, GridRowModel } from '@mui/x-data-grid/models';
 
 export interface IOperatorsTableProps {
-    columns: any;
-    rows: IOperator[];
+    columns: GridColDef[];
+    rows: GridRowModel[];
 }
 
-const StyledDataGrid = styled(DataGrid)({
-    '& .MuiDataGrid-columnHeaderTitle, div[data-colindex="0"]': {
-        fontWeight: 600
-    },
-    '& .MuiDataGrid-columnSeparator': {
-        display: 'none !important'
-    },
-    '& .MuiDataGrid-cell:focus, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-iconButtonContainer:focus': {
-        fontSize: 15,
-        outline: 'solid #f04259 1px !important',
-    },
-    '& .MuiTablePagination-selectLabel, & .MuiSelect-select': {
-        color: '#668099',
-    },
-    '& .MuiDataGrid-scrollbar': {
-        '&::-webkit-scrollbar': {
-            width: 7,
-            height: 7,
-        },
-        '&::-webkit-scrollbar-thumb': {
-            backgroundColor: "grey",
-            borderRadius: 5,
-        },
-        '&::-webkit-scrollbar-track': {
-            backgroundColor: "#fff",
-        },
-    },
-});
-
-export default function OperatorsTable ({columns, rows}: IOperatorsTableProps) {
+export const OperatorsTable: React.FC<IOperatorsTableProps> = ({columns, rows}: IOperatorsTableProps) => {
+    const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({ page: 0, pageSize: 10 });
 
     return (
         <Paper sx={{ width: '100%', height: 500 }}>
             <StyledDataGrid
                 rows={rows}
                 columns={columns}
-                initialState={{ pagination: { paginationModel } }}
-                pageSizeOptions={[5, 10]}
+                paginationModel={paginationModel}
+                onPaginationModelChange={setPaginationModel}
+                pageSizeOptions={[5, 10, 15]}
                 checkboxSelection={false}
                 sx={{ border: 0 }}
                 rowHeight={60}

@@ -1,72 +1,46 @@
-import { TextField } from '@mui/material';
-import Card from '@mui/material/Card';
-import * as React from 'react';
-import { useEffect, useMemo, useState } from 'react';
-import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { operatorAddonsFetching, operatorsFetching } from '../../store/reducers/OperatorsSlice';
-import { getTableColumns, getTableRows } from '../../utils/utils';
-import OperatorsTable from '../OperatorsTable/OperatorsTable';
+import React from 'react';
+import { useMemo } from 'react';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import { useDebouncedValue } from '../../hooks/useDebouncedValue';
+import { useTableData } from '../../hooks/useTableData';
+import { RootState } from '../../store/store';
+import { Loader } from '../common/Loader';
+import { Notification } from '../common/Notification';
+import { OperatorsTable } from '../OperatorsTable/OperatorsTable';
+import { StyledCard, StyledTextField } from './styled';
 
+export const OperatorsTableWrapper: React.FC = () => {
+    const {isLoading, error} = useAppSelector((state: RootState) => state.operators);
+    const [debouncedValue, searchValue, setSearchValue] = useDebouncedValue(300);
+    const [columns, rows] = useTableData();
+    const filteredRows = useMemo(() => debouncedValue 
+        ? rows.filter((row: any) => row.name.toLowerCase().includes(debouncedValue.toLowerCase()))
+        : rows, [rows, debouncedValue]);
 
-const StyledTextField = styled(TextField)({
-    '&.MuiFormControl-root': {
-        width: 250,
-        margin: '20px'
-    },
-    '& .MuiFormLabel-root, & .MuiInputLabel-root': {
-        '&.Mui-focused': {
-            color: 'grey'
-        },
-    },
-    '& .MuiOutlinedInput-root, & .MuiInputBase-root': {
-        '& fieldset, &:hover fieldset, &.Mui-focused fieldset': {
-            border: '1px solid grey',
-        },
-    },
-});
-
-const StyledCard = styled(Card)({
-    '&.MuiPaper-root': {
-        marginTop: '30px'
+    if (error) {
+        return <Notification 
+            type='error' 
+            title='Error' 
+            message='Something went wrong with the table data.' 
+        />;
     }
-});
-
-
-export interface IAppProps {
-}
-
-export default function OperatorsTableWrapper (props: IAppProps) {
-    const dispatch = useAppDispatch();
-    const [searchText, setSearchText] = useState('');
-    const {operators, operatorAddons} = useAppSelector((state: any) => state.operators);
-    const columns: any = useMemo(() => getTableColumns(operatorAddons), [operatorAddons]);
-    const rows: any = useMemo(() => {
-        const tableRows = getTableRows(operators, operatorAddons);
-        return searchText
-            ? tableRows.filter(row => row.name.toLowerCase().includes(searchText.toLowerCase()))
-            : tableRows;
-
-    }, [operators, operatorAddons, searchText]);
-  
-    useEffect(() => {
-      dispatch(operatorsFetching());
-      dispatch(operatorAddonsFetching());
-    }, [dispatch])
-
-    console.log(columns, rows);
-    
   
     return (
-        <StyledCard>
-            <StyledTextField 
-                id="outlined-basic" 
-                label="Search" 
-                placeholder='User name...'
-                value={searchText} 
-                onChange={({target}) => setSearchText(target.value)}
-            />
-            <OperatorsTable columns={columns} rows={rows} />
-        </StyledCard>
+        <>
+            {
+                isLoading 
+                    ? <Loader />
+                    : <StyledCard>
+                        <StyledTextField 
+                            id="outlined-basic" 
+                            label="Search" 
+                            placeholder='User name...'
+                            value={searchValue} 
+                            onChange={({target: {value}}) => setSearchValue(value)}
+                        />
+                        <OperatorsTable columns={columns} rows={filteredRows} />
+                </StyledCard>
+            }
+        </>
   );
 }

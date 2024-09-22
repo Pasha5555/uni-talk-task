@@ -1,8 +1,7 @@
-import { Typography } from '@mui/material';
 import React from 'react';
+import { Typography } from '@mui/material';
+import { OperatorsTableWrapper } from './components/OperatorsTableWrapper/OperatorsTableWrapper';
 import './App.css';
-import OperatorsTableWrapper from './components/OperatorsTableWrapper/OperatorsTableWrapper';
-
 
 function App() {
   return (

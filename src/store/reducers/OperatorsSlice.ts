@@ -1,21 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IOperator } from "../../models/IOperator";
 import { IOperatorAddon } from "../../models/IOperatorAddon";
+import { IOperatorsState } from "../../models/IOperatorsState";
 
-
-interface OperatorsState {
-    operators: IOperator[];
-    operatorAddons: IOperatorAddon[]
-    isLoading: boolean;
-    error: string;
-}
-
-const initialState: OperatorsState = {
+const initialState: IOperatorsState = {
     operators: [],
     operatorAddons: [],
     isLoading: false,
     error: ''
-}
+};
 
 export const operatorsSlice = createSlice({
     name: 'operators',

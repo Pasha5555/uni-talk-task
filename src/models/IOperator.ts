@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 export interface IOperator {
 	createdAt: string;
 	name: string;
