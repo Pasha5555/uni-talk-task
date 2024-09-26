@@ -10,12 +10,12 @@ import { GridRowModel } from "@mui/x-data-grid/models";
 type FormatCallback = (param: any) => any;
 
 const getColumnFormat = (
-  field: string, 
-  headerName: string, 
-  width: number, 
-  type: any, 
-  renderCell?: FormatCallback | null, 
-  valueGetter?: FormatCallback
+    field: string, 
+    headerName: string, 
+    width: number, 
+    type: any, 
+    renderCell?: FormatCallback | null, 
+    valueGetter?: FormatCallback
 ): GridColDef => {
   return { 
     field, 
@@ -30,18 +30,18 @@ const getColumnFormat = (
 
 export const getTableColumns = (operatorAddons: IOperatorAddon[]): GridColDef[] => {
     const operatorAddonsCols = Array.from(new Set(
-      operatorAddons.map((operatorAddon: IOperatorAddon) => operatorAddon.fieldName)
+        operatorAddons.map((operatorAddon: IOperatorAddon) => operatorAddon.fieldName)
     ));
     const defaultColumns: GridColDef[] = [
-      getColumnFormat('order', '#', 50, 'number', (params: any) => params.id),
-      getColumnFormat('name', 'User', 250, 'string', (params: any) => {
+        getColumnFormat('order', '#', 50, 'number', (params: any) => params.id),
+        getColumnFormat('name', 'User', 250, 'string', (params: any) => {
         const {avatar, name} = params.row;        
-        return <User userAvatarUrl={avatar} userName={name} />;
-      }),
-      getColumnFormat('isWorking', 'Is working?', 150, 'string', (params) => 
-        <CustomCheckbox defaultChecked={params.row.isWorking} />
-      ),
-      getColumnFormat('createdAt', 'Created at', 200, 'string', null, (value) => formatDate(value))
+            return <User userAvatarUrl={avatar} userName={name} />;
+        }),
+        getColumnFormat('isWorking', 'Is working?', 150, 'string', (params) => 
+            <CustomCheckbox defaultChecked={params.row.isWorking} />
+        ),
+        getColumnFormat('createdAt', 'Created at', 200, 'string', null, (value) => formatDate(value))
     ];
     const formattedOperatorAddonsCols: GridColDef[] = operatorAddonsCols.map((operatorName) => {
         return getColumnFormat(operatorName.toLowerCase(), operatorName, 150, 'string');
@@ -61,9 +61,9 @@ export const getTableRows = (operators: IOperator[], operatorAddons: IOperatorAd
 };
 
 export function formatDate(dateString: string): string {
-  const [datePart, timePart] = new Date(dateString).toISOString().split('T');
-  const [year, month, day] = datePart.split('-');
-  const [hours, minutes] = timePart.split(':');
-  
-  return `${day}.${month}.${year} ${hours}:${minutes}`;
+    const [datePart, timePart] = new Date(dateString).toISOString().split('T');
+    const [year, month, day] = datePart.split('-');
+    const [hours, minutes] = timePart.split(':');
+
+    return `${day}.${month}.${year} ${hours}:${minutes}`;
 }

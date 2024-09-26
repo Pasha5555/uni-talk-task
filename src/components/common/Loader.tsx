@@ -1,20 +1,15 @@
 import React from "react";
-import { Box, CircularProgress } from "@mui/material"
+import { Box, Stack } from "@mui/material"
+import { StyledCircularProgress } from "./styled";
 
 export const Loader: React.FC = () => {
     return (
-        <Box 
-            display="flex" 
-            justifyContent="center" 
-            alignItems="center" 
-            height="80vh"
-        >
-            <CircularProgress 
-                sx={() => ({ color: '#f04259' })}
+        <Stack height="80vh">
+            <StyledCircularProgress 
                 size={60}
                 thickness={2}
                 value={100}
             />
-        </Box>
+        </Stack>
     )
 };

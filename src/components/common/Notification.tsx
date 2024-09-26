@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Alert, AlertTitle, Collapse } from "@mui/material"
+import { Alert, AlertTitle } from "@mui/material"
+import { StyledCollapse } from "./styled";
 
 interface INotificationProps {
     type: 'error' | 'success' | 'info' | 'warning';
@@ -11,11 +12,11 @@ export const Notification: React.FC<INotificationProps> = ({type, title, message
     const [open, setOpen] = useState(true);
 
     return (
-        <Collapse in={open} sx={{ mt: 5, width: 400, bottom: 10, right: 10, position: 'absolute' }}>
+        <StyledCollapse in={open}>
             <Alert severity={type} onClose={() => setOpen(false)}>
                 <AlertTitle>{title}</AlertTitle>
                 {message}
             </Alert>
-        </Collapse>
+        </StyledCollapse>
     )
 };

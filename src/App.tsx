@@ -6,8 +6,8 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Typography variant="h4">Operators</Typography>
-      <OperatorsTableWrapper />
+        <Typography variant="h4">Operators</Typography>
+        <OperatorsTableWrapper />
     </div>
   );
 }

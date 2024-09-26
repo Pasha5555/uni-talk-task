@@ -13,9 +13,9 @@ export const useTableData = (): [GridColDef[], GridRowModel[]] => {
     const rows: GridRowModel[] = useMemo(() => getTableRows(operators, operatorAddons), [operators, operatorAddons]);
 
     useEffect(() => {
-      dispatch(operatorsFetching());
-      dispatch(operatorAddonsFetching());
+        dispatch(operatorsFetching());
+        dispatch(operatorAddonsFetching());
     }, [dispatch])
 
-  return [columns, rows];
+    return [columns, rows];
 };
